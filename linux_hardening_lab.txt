@@ -1,0 +1,133 @@
+ssh server@server_ip
+Password: initial_password
+
+passwd -S $USER
+passwd $USER -->
+new_password
+
+ssh-keygen -t rsa -->
+hardening_lab
+mv hardening_l* ~/.ssh/
+cd ~/.ssh
+ssh-copy-id -i ~/.ssh/hardening_lab.pub server@server_ip
+cat authorized_keys
+
+cd /etc/ssh
+sudo vim sshd_config -->
+PasswordAuthentication no    #PermitRootLogin already set to no
+
+sudo systemctl restart ssh
+ssh -i ~/.ssh/hardening_lab server@server_ip
+
+cd ~/.ssh/
+vim config -->
+Host hardening_lab
+        HostName server_ip
+        User server
+        IdentityFile ~/.ssh/hardening_lab
+ssh hardening_lab
+
+sudo apt update
+sudo apt install less
+
+sudo useradd myuser
+sudo passwd myuser -->
+user_password
+
+cd ~/.ssh
+ssh-keygen -t rsa -->
+1_hardening_lab
+cat 1_hardening_lab.pub | ssh hardening_lab "sudo mkdir -p /home/myuser/.ssh && sudo tee /home/myuser/.ssh/authorized_keys"
+vim config -->
+Host 1_hardening_lab
+        HostName server_ip
+        User myuser
+        IdentityFile ~/.ssh/1_hardening_lab
+ssh 1_hardening_lab    #works, not in sudoers list
+
+ssh hardening_lab
+ss -tuln
+top
+
+apt show lynis
+sudo apt install lynis
+lynis
+lynis audit system
+
+apt show *scap
+apt show openscap*
+sudo apt install libopenscap8    #according to the manual on the web
+apt show libopenscap25t64
+sudo apt install libopenscap25t64    #can't use the tool, oscap -V shows nothing
+sudo apt install openscap-utils    #oscap -V outputs versions now
+apt show ssg-*
+
+wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.77/scap-security-guide-0.1.77.tar.gz
+tar xzf scap-security-guide-0.1.77.tar.gz
+cd scap-security-guide-0.1.77
+
+! apt show cmake ninja-build python3-yaml python3-jinja2 python3-jsonschema xsltproc    #not necessary
+! sudo apt install cmake ninja-build python3-yaml python3-jinja2 python3-jsonschema xsltproc    #not necessary
+
+sudo mkdir -p  /usr/share/xml/scap/ssg/content
+cd ~/scap-security-guide-0.1.77
+ls
+sudo cp ssg-ubuntu2404-ds.xml /usr/share/xml/scap/ssg/content/ssg-ubuntu2404-ds.xml
+cd ..
+rm -r scap-security-guide-0.1.77
+rm scap-security-guide-0.1.77.tar.gz
+cd /usr/share/xml/scap/ssg/content
+
+oscap info ssg-ubuntu2404-ds.xml
+sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_level1_server --report report.html /usr/share/xml/scap/ssg/content/ssg-ubuntu2404-ds.xml
+ssh hardening_lab "sudo cat /usr/share/xml/scap/ssg/content/report.html" > report.html    #downl.to host
+
+apt show tmux    #something about keeping sessions open even if consle is closed...
+
+sudo apt install nmon
+
+https://documentation.wazuh.com/current/quickstart.html
+curl -sO https://packages.wazuh.com/4.12/wazuh-install.sh && sudo bash ./wazuh-install.sh -a  -->
+        27/07/2025 18:55:55 INFO: --- Summary ---
+        27/07/2025 18:55:55 INFO: You can access the web interface https://<wazuh-dashboard-ip>:443
+        User: admin
+        Password: SLq9rzk.JBwgLN0pvVSPkX6g6q0fl0q6
+https://server_ip:443
+
+ssh -L 8443:localhost:443 hardening_lab
+https://localhost:8443/
+
+sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt    #print all the passwords
+sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list    #disablies the Wazuh package repositories after installation to prevent accidental upgrades
+
+https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html
+sudo rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+sudo touch /etc/zypp/repos.d/wazuh.repo
+#instead of this:
+cat > sudo /etc/zypp/repos.d/wazuh.repo <<\EOF
+[wazuh]
+gpgcheck=1
+gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+enabled=1
+name=EL-$releasever - Wazuh
+baseurl=https://packages.wazuh.com/4.x/yum/
+protect=1
+EOF
+#I use this:
+sudo vim wazuh.repo -->
+[wazuh]
+gpgcheck=1
+gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+enabled=1
+name=EL-$releasever - Wazuh
+baseurl=https://packages.wazuh.com/4.x/yum/
+protect=1
+
+sudo zypper ref
+sudo WAZUH_MANAGER="server_ip" zypper install wazuh-agent
+systemctl daemon-reload
+systemctl enable wazuh-agent
+systemctl start wazuh-agent
+
+sudo sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
