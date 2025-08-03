@@ -1,0 +1,79 @@
+This is a draft!!!
+
+echo $XDG_SESSION_TYPE
+lspci | grep VGA
+
+sudo zypper in openSUSE-repos-Tumbleweed-NVIDIA
+sudo zypper lr -d
+sudo zypper install-new-recommends --repo NVIDIA\:repo-non-free
+
+zypper se -s x11-video-nvidia*G06 nvidia-video-G06 nvidia-gl*G06 nvidia-compute*G06 nvidia-compute-utils-G06
+sudo zypper in nvidia-video-G06 nvidia-gl*G06 nvidia-compute*G06 nvidia-compute-utils-G06
+sleep 3s && systemctl reboot
+
+sudo zypper in suse-prime bbswitch-kmp-default
+sleep 3s && systemctl reboot
+
+sudo prime-select boot nvidia
+sudo prime-select boot intel
+sudo prime-select boot offload
+
+lspci | grep VGA
+lscpu | grep Arch 
+sudo hwinfo --gfxcard | grep Model
+sudo hwinfo --arch
+
+sudo nvidia-xconfig
+nvidia-smi 
+echo $XDG_SESSION_TYPE 
+
+sudo journalctl --boot -1 --reverse >> ~/Desktop/looking_for_nvidia_error.txt
+
+zypper info nvidia-utils-G06
+nvidia-settings
+
+xrandr
+
+sudo journalctl --reverse --boot >> ~/Desktop/note_21_12_2024_1.txt
+cat ~/Desktop/note_21_12_2024_1.txt | grep -i error
+
+sudo nvidia-xconfig 
+
+cd /etc/X11/
+sudo cp xorg.conf xorg.conf.copy
+mv xorg.conf.copy xorg.conf.my_copy
+sudo rm xorg.conf
+sudo cp xorg.conf.nvidia-xconfig-original xorg.conf
+___________________________________
+lsmod | grep kvm
+sudo modprobe -r kvm_intel kvm
+
+------------------------------------------------------------------------------
+zypper in nvidia-open-driver-G06-signed-kmp-default
+
+nvidia-video-G06 nvidia-gl-G06 nvidia-compute-utils-G06    #required and will be installed later
+
+zypper addrepo https://download.nvidia.com/opensuse/tumbleweed/  nvidia
+
+version=$(rpm -qa --queryformat '%{VERSION}\n' nvidia-open-driver-G06-signed-kmp-default | cut -d "_" -f1 | sort -u | tail -n 1)
+zypper in nvidia-video-G06 == ${version} nvidia-compute-utils-G06 == ${version}
+    -->
+    The following 12 NEW packages are going to be installed:
+  clinfo libnvidia-egl-gbm1 libnvidia-egl-wayland1 libnvidia-egl-x111 libOpenCL1 nvidia-common-G06 nvidia-compute-G06 nvidia-compute-utils-G06 nvidia-gl-G06 nvidia-modprobe nvidia-persistenced
+  nvidia-video-G06
+---
+zypper addrepo https://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_64/  cuda
+zypper in cuda-toolkit-12-8
+
+/usr/local/cuda-12.8/extras/demo_suite/deviceQuery
+---
+zypper info switcheroo-control suse-prime
+
+sudo zypper remove suse-prime   #if needed
+sudo zypper al suse-prime
+sudo zypper in switcheroo-control   #if needed
+
+sudo systemctl enable --now switcheroo-control.service
+switcherooctl list
+
+switcherooctl launch -g 1 <application>
