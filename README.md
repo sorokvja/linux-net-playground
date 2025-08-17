@@ -7,8 +7,9 @@
 
 The structure currently in use is the following:
 - repo-root/
+  - README.md
   - .gitignore
-  - temporary 
+  - temporary/
   - baseline/
   - lab_001/
   - ...
