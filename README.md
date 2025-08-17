@@ -9,11 +9,11 @@ The structure currently in use is the following:
 - repo-root/
   - README.md
   - .gitignore
-  - temporary/
-  - baseline/
-  - lab_001/
+  - temporary/  # temporary files, notes, drafts
+  - baseline/   # initial VM + network setup
+  - lab_001/    # first lab
   - ...
-  - lab_xx/
+  - lab_x/      # following labs
 
 Scope includes the topics: Local VM (Virtual Machine), Containers, Linux Desktop, Linux Server, Networking, Routing, Firewall, SIEM, Vulnerability Scanner, etc.. 
 
