@@ -1,0 +1,38 @@
+Install VirtualBox
+
+In VirtualBox:
+Installation of OPNsense
+    In VB settings, enable two network adapters:
+        NAT
+        Internal Network (name = "intnet_monitor"; promiscuous mode = "Deny")
+    Launch VM and proceed with the installation
+
+Installation of openSUSE Leap 15.6 xfce
+    In VB settings, enable network adapter:
+        Internal Network (name = "intnet_monitor"; promiscuous mode = "Deny")
+    Launch VM and proceed with the installation
+
+Installation of Ubuntu Server 24.04
+    In VB settings, enable network adapter:
+        Internal Network (name = "intnet_monitor"; promiscuous mode = "Allow VMs")
+    Launch VM and proceed with the installation:
+        Do not forget to install the OpenSSH server
+
+OPNsense initial Configuration:
+Login as a "root"
+Enter an option: 1) Assign interfaces
+    Skip LAGGs
+    Skip VLANs
+    Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
+    Assign WAN (compare NIC MAC with the one assigned for the NAT adapter in VB)
+Enter an option: 6) Reboot system
+
+Ensuring OPNsense VM have access to the Internet:
+    Enter an option: 7) Ping host
+    Enter "8.8.8.8", see results
+
+OPNsense - Initial Configuration via the Dashboard
+Launch openSUSE, open Firefox and enter IP address shown by OPNsense VM's screen (e.g., https://192.168.1.1), login as a root.
+Follow the Configuration Wizard:
+    General information: update your timezone, no other changes are mandatory
+    Network [WAN]: Type - DHCP, Block RFC1918 Private Networks - UNcheck.
