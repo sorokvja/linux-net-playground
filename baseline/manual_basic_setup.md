@@ -19,6 +19,14 @@ Creation of virtual machines (VM) with VirtualBox is straightforward and user fr
 If you are not following the suggestions or choosing other guest OSs of your own taste, the author assumes you know what you are doing and will be fine. 
 
 ## VM Configuration 
+### HW Resources Assigned
+It depends on both the purpose of VM itself and the host hardware specs, how many CPU cores or RAM to assign per a VM. Also remember to ensure there are always some "free" resources not assigned to any VM in order host OS can perform its functions. Generally speaking, without any guarantees, these could be initial settings one can experiment with: 
+VM|CPU Cores|RAM, MB|Video Memory, MB|Storage, GB|
+|-|---------|---|------------|-------|
+|OPNsense|2|2048|16|25|
+|openSUSE Leap 15.6 xfce|4|3072|128|30|
+|Ubuntu Server 24.04|4|3072|16|30|
+
 ### OPNsense VM
 1. Create a new VM, but do not launch it yet. 
 2. Open OPNsense VM settings, proceed to Network
