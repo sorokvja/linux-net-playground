@@ -1,6 +1,6 @@
 # Basic Setup
 
-**The Basic Setup** chapter describes... the basic setup required to follow next steps described, including lab_001 and others. To be ready, you need  to create 3 virtual machines using [VirtualBox](https://www.virtualbox.org/) virtualization software. The virtual machines required are: 
+**The Basic Setup** manual describes... the basic setup required to follow next steps described, including lab_001 and others. To be ready, you need  to create 3 virtual machines using [VirtualBox](https://www.virtualbox.org/) virtualization software. The virtual machines required are: 
 1. [OPNsense](https://opnsense.org/) - an open source firewall and routing platform
 2. [openSUSE Leap 15.6 xfce](https://www.opensuse.org/#Leap) - stabilized OS with openSUSE's regular release
 3. [Ubuntu Server 24.04](https://ubuntu.com/server) - for simple deployment
@@ -63,3 +63,6 @@ If you are not following the suggestions or choosing other guest OSs of your own
     1. Do not forget to enable OpenSSH server installation when "Installation Wizard" will ask you if it's needed
 5. Reboot, if required, login as a user your created during the installation
 6. Ensure Ubuntu Server VM has access to the Internet: type "ping -c 4 8.8.8.8", see results 
+
+## Next steps
+Now you are ready to proceed to [manual_basic_connection](https://github.com/sorokvja/linux-net-playground/blob/main/baseline/manual_basic_connection.md). 
