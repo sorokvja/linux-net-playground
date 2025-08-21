@@ -62,7 +62,4 @@ If you are not following the suggestions or choosing other guest OSs of your own
 4. Launch VM and proceed with the guest OS installation:
     1. Do not forget to enable OpenSSH server installation when "Installation Wizard" will ask you if it's needed
 5. Reboot, if required, login as a user your created during the installation
-6. Ensure Ubuntu Server VM has access to the Internet - type "ping -c 4 8.8.8.8", see results 
-
-# SSH Connection to Ubuntu Server With Password
-To be added
+6. Ensure Ubuntu Server VM has access to the Internet: type "ping -c 4 8.8.8.8", see results 
