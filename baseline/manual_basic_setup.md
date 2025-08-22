@@ -1,5 +1,5 @@
 # Basic Setup
-
+## Introduction 
 **The Basic Setup** manual describes... the basic setup required to follow next steps described, including lab_001 and others. To be ready, you need  to create 3 virtual machines using [VirtualBox](https://www.virtualbox.org/) virtualization software. The virtual machines required are: 
 1. [OPNsense](https://opnsense.org/) - an open source firewall and routing platform
 2. [openSUSE Leap 15.6 xfce](https://www.opensuse.org/#Leap) - stabilized OS with openSUSE's regular release
@@ -17,6 +17,8 @@ Creation of virtual machines (VM) with VirtualBox is straightforward and user fr
 3. create a separate virtual hard disk per a VM with "Pre-allocate Full Size" option enabled.
 
 If you are not following the suggestions or choosing other guest OSs of your own taste, the author assumes you know what you are doing and will be fine. 
+## Network topology
+To be added...
 
 ## VM Configuration 
 ### HW Resources Assigned
