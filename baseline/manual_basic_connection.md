@@ -31,7 +31,7 @@ passwd $USER
 **!DRAFT!**
 
 **openSUSE Leap:**
-Open new terminal, ensure you are logged in as a local openSUSE Leap user.  
+Open new terminal, ensure you are logged in as a local openSUSE Leap user. 
 Let's decide where SSH keys will be stored first. 
 ```bash
 #
