@@ -2,8 +2,8 @@
 ## Introduction 
 **The Basic Setup** manual describes... the basic setup required to follow next steps described, including lab_001 and others. To be ready, you need  to create 3 virtual machines using [VirtualBox](https://www.virtualbox.org/) virtualization software. The virtual machines required are: 
 1. [OPNsense](https://opnsense.org/) - an open source firewall and routing platform
-2. [openSUSE Leap 15.6 xfce](https://www.opensuse.org/#Leap) - stabilized OS with openSUSE's regular release
-3. [Ubuntu Server 24.04](https://ubuntu.com/server) - for simple deployment
+2. [openSUSE Leap 15.6 xfce](https://www.opensuse.org/#Leap) - a workstation for experiments 
+3. [Ubuntu Server 24.04](https://ubuntu.com/server) - a server where software will be installed
 
 Of course any other known distro a user is familiar with could be chosen instead of the listed ones. Here are the main reasons why the author chose the ones listed:
 - Ubuntu was chosen mostly because it is quite popular and beginner friendly, also some experience with apt package manager can be handy in the future. 
@@ -29,19 +29,34 @@ VM|CPU Cores|RAM, MB|Video Memory, MB|Storage, GB|
 |openSUSE Leap 15.6 xfce|4|3072|128|30|
 |Ubuntu Server 24.04|4|3072|16|30|
 
+### VirtualBox
+For now, VirtualBox GUI is used:
+1. File --> Tools --> Network (or press CTRL + H), by default "Host-only Networks" tab should be open
+2. Create a new network for the basic setup, the network name will be assigned automatically:
+    1. Default Adapter configuration usually works just fine, but you might consider to adjust it manually or choose the option "Configure Adapter Automatically" (if the latter is chosen, ensure "Enable Server" option in "DHCP Server" tab is chosen as well)
+    2. For now, let's assume you know what you are doing if you choose "Configure Adapter Manually" option
+
 ### OPNsense VM
 1. Create a new VM, but do not launch it yet. 
 2. Open OPNsense VM settings, proceed to Network
-3. Ensure two network adapters are enabled
+3. Ensure three network adapters are enabled:
     1. NAT
-    2. Internal Network (name = "intnet_monitor"; promiscuous mode = "Deny")
+    2. Host-only Adapter (name = vboxnet1; promiscuous mode = "Deny")
+    3. Internal Network (name = "lab_srv_net"; promiscuous mode = "Deny")
+    4. Internal Network (name = "lab_ws_net"; promiscuous mode = "Deny")
 4. Launch VM and proceed with the guest OS installation
 5. Reboot, if required, login as a root
-6. Choose an option "1) Assign interfaces":
+6. Choose an option "1) Assign interfaces" (interface order may differ, follow the OPNsense's actual order):
     1. Skip LAGGs
     2. Skip VLANs
-    3. Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
-    4. Assign WAN (compare NIC MAC with the one assigned for the NAT adapter in VB)
+    3. Assign WAN (compare NIC MAC with the one assigned for the NAT adapter in VB)
+        1. Enter the WAN interface name (e.g., em0)
+    4. Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
+        1. Enter the LAN interface name (e.g., em1)
+    5. Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
+        1. Enter the Optional interface 1 name (e.g., em2)
+    6. Press "Enter"
+        1. Type "y" if you are sure you did it right and press "Enter" one more time
 7. Enter an option "6) Reboot system"
 8. Login as a root, ensure OPNsense VM has access to the Internet, choose an option "7) Ping host":
     1. Enter "8.8.8.8", see results 
@@ -51,7 +66,7 @@ VM|CPU Cores|RAM, MB|Video Memory, MB|Storage, GB|
 1. Create a new VM, but do not launch it yet. 
 2. Open VM settings, proceed to Network
 3. Ensure only one network adapter is enabled:
-    1. Internal Network (name = "intnet_monitor"; promiscuous mode = "Deny")
+    1. Internal Network (name = "lab_ws_net"; promiscuous mode = "Deny")
 4. Launch VM and proceed with the guest OS installation
 5. Reboot, if required, login as a user your created during the installation
 6. If not installed automatically, proceed with installation of VirtualBox Guest Additions (usually available via VirtualBox's User Interface **for a running VM**: Devices --> Insert Guest Additions CD Image... or/ and Devices --> Upgrade Guest Additions...), reboot if required
@@ -68,7 +83,7 @@ VM|CPU Cores|RAM, MB|Video Memory, MB|Storage, GB|
 1. Create a new VM, but do not launch it yet. 
 2. Open VM settings, proceed to Network
 3. Ensure only one network adapter is enabled:
-    1. Internal Network (name = "intnet_monitor"; promiscuous mode = "Allow VMs")
+    1. Internal Network (name = "lab_srv_net"; promiscuous mode = "Allow VMs")
 4. Launch VM and proceed with the guest OS installation:
     1. Do not forget to enable OpenSSH server installation when "Installation Wizard" will ask you if it's needed
 5. Reboot, if required, login as a user your created during the installation
