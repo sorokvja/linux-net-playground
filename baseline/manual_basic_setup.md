@@ -41,7 +41,7 @@ For now, VirtualBox GUI is used:
 2. Open OPNsense VM settings, proceed to Network
 3. Ensure three network adapters are enabled:
     1. NAT
-    2. Host-only Adapter (name = vboxnet1; promiscuous mode = "Deny")
+    2. Host-only Adapter (name - choose the one you created recently, i.e., "vboxnet0"; promiscuous mode = "Deny")
     3. Internal Network (name = "lab_srv_net"; promiscuous mode = "Deny")
     4. Internal Network (name = "lab_ws_net"; promiscuous mode = "Deny")
 4. Launch VM and proceed with the guest OS installation
@@ -55,12 +55,22 @@ For now, VirtualBox GUI is used:
         1. Enter the LAN interface name (e.g., em1)
     5. Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
         1. Enter the Optional interface 1 name (e.g., em2)
-    6. Press "Enter"
+    6. Assign LAN (compare NIC MAC with the one assigned for the Internal Network adapter in VB)
+        1. Enter the Optional interface 1 name (e.g., em3)
+    8. Press "Enter"
         1. Type "y" if you are sure you did it right and press "Enter" one more time
 7. Enter an option "6) Reboot system"
 8. Login as a root, ensure OPNsense VM has access to the Internet, choose an option "7) Ping host":
     1. Enter "8.8.8.8", see results 
     2. Repeat, but this time instead of "8.8.8.8" enter "www.google.com", see results
+
+### Host OS
+1. OPNsense - Initial Configuration via the Dashboard
+2. Open a web browser on your PC. In place of URL, enter IP address shown to you by OPNsense on OPNsense VM's screen (e.g., https://192.168.1.1)
+3. Login as a "root"
+4. Follow the Configuration Wizard, in most cases you should be fine with the default options, except the following:
+    1. General information: update your timezone, no other changes are mandatory
+    2. Network [WAN]: Type - DHCP, Block RFC1918 Private Networks - UNcheck.
 
 ### openSUSE Leap 15.6 xfce
 1. Create a new VM, but do not launch it yet. 
@@ -70,14 +80,7 @@ For now, VirtualBox GUI is used:
 4. Launch VM and proceed with the guest OS installation
 5. Reboot, if required, login as a user your created during the installation
 6. If not installed automatically, proceed with installation of VirtualBox Guest Additions (usually available via VirtualBox's User Interface **for a running VM**: Devices --> Insert Guest Additions CD Image... or/ and Devices --> Upgrade Guest Additions...), reboot if required
-7. OPNsense - Initial Configuration via the Dashboard
-   1. Open a web browser of your choise (Firefox is usually a default option already installed)
-   2. In place of URL, enter IP address shown to you by OPNsense on OPNsense VM's screen (e.g., https://192.168.1.1)
-   3. Login as a "root"
-   4. Follow the Configuration Wizard, in most cases you should be fine with the default options, except the following:
-      1. General information: update your timezone, no other changes are mandatory
-      2. Network [WAN]: Type - DHCP, Block RFC1918 Private Networks - UNcheck.
-8. Ensure openSUSE Leap VM has access to the Internet - in the web browser open www.google.com web page, it should properly load 
+7. Ensure openSUSE Leap VM has access to the Internet - in the web browser open www.google.com web page, it should properly load 
 
 ### Ubuntu Server 24.04
 1. Create a new VM, but do not launch it yet. 
