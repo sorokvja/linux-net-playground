@@ -45,7 +45,8 @@ graph TD;
   R[[Router / Wi-Fi<br/>LAN: 192.168.1.1/24]]
 
   NET -- Public IP at ISP --> ISP
-  ISP -- "WAN (CGNAT)\n100.64.0.2/30" --> R
+  ISP -- "WAN (CGNAT)
+  100.64.0.2/30" --> R
 
   %% Wired clients
   PC1[PC1<br/>192.168.10.10]
