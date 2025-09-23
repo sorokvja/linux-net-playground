@@ -12,8 +12,10 @@ sudo usermod -G docker -a $USER
 newgrp docker
 sudo systemctl restart docker
 docker version
-#"docker version" output should not state any errors or questions at this point, if it does, something is not right
-#root access rights migh still be needed to continue while the VM is not restarted
+#"docker version" output should not state any errors or questions at this point,
+#if it does, something is not right
+
+#root access rights migh still be needed to continue if the VM is not restarted or user hasn't loged out
 
 #launch the lab for the first time:
 docker compose up
