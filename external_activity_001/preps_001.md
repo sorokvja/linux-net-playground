@@ -43,3 +43,11 @@ docker compose stop
 cd <path to stratocyberlab>
 docker compose start
 ```
+
+#update the lab:
+```bash
+cd <path to stratocyberlab>
+git pull
+docker compose up --build --force-recreate
+#if should start automatically
+```
