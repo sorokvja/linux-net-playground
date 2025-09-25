@@ -49,5 +49,6 @@ docker compose start
 cd <path to stratocyberlab>
 git pull
 docker compose up --build --force-recreate
-#if should start automatically
+#the lab should start automatically
+#on the web-GUI, press CTRL+SHIFT+R to reload cached assets
 ```
