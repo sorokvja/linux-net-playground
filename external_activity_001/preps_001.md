@@ -21,30 +21,30 @@ docker version
 docker compose up
 ```
 
-#to connect to the lab with the VM's terminal, open new VM's terminal and enter:  
+#to **connect** to the lab with the VM's terminal, open new VM's terminal and enter:  
 #password --> ByteThem123
 ```bash
 ssh root@127.0.0.1 -p 2222
 ```
-#to check what is running, open new VM's terminal:
+#to **check** what is running, open new VM's terminal:
 ```bash
 cd <path to stratocyberlab>
 docker compose ps
 ```
 
-#to stop the lab, open new VM's terminal:
+#to **stop** the lab, open new VM's terminal:
 ```bash
 cd <path to stratocyberlab>
 docker compose stop
 ```
 
-#next time to start the lab:
+#next time to **start** the lab:
 ```bash
 cd <path to stratocyberlab>
 docker compose start
 ```
 
-#update the lab, if necessary:
+#**update** the lab, if necessary:
 ```bash
 cd <path to stratocyberlab>
 #stop might be required if autostart is enabled:
