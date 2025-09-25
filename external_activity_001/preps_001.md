@@ -44,11 +44,11 @@ cd <path to stratocyberlab>
 docker compose start
 ```
 
-#update the lab:
+#update the lab, if necessary:
 ```bash
 cd <path to stratocyberlab>
 git pull
 docker compose up --build --force-recreate
-#the lab should start automatically
+#the lab should start automatically at this point
 #on the web-GUI, press CTRL+SHIFT+R to reload cached assets
 ```
