@@ -47,6 +47,8 @@ docker compose start
 #update the lab, if necessary:
 ```bash
 cd <path to stratocyberlab>
+#might be required if autostart is enabled:
+docker compose stop
 git pull
 docker compose up --build --force-recreate
 #the lab should start automatically at this point
