@@ -1,4 +1,6 @@
-Actions performed in OpenSuse Leap 15.6 xfce VirtualBox VM with the following HW resources assigned: 6CPU, 6GB, 90GB
+Actions performed in OpenSuse Leap 15.6 xfce VirtualBox VM with the following HW resources assigned: 6CPU, 6GB, 90GB  
+
+> Just in case, these are individual commands described on the page, not a script!
 
 #enter the following commands in the terminal window
 ```bash
